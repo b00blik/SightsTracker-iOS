@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var sightNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
-    
+    @IBOutlet weak var ratingControl: RatingControl!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -45,10 +45,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imagePickerController.sourceType = .PhotoLibrary //тут можно выбрать камеру или фотобиблиотеку
         imagePickerController.delegate = self //make sure ViewController is notified when the user picks an image
         presentViewController(imagePickerController, animated: true, completion: nil) //called by ViewController; Asks ViewController to present the view controller defined by imagePickerController
-    }
-    
-    @IBAction func setDefaultLabelText(sender: UIButton) {
-        sightNameLabel.text = "Default Text"
     }
     
     //Mark: UIImagePickerControllerDelegate

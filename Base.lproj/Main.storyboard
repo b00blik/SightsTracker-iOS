@@ -18,32 +18,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="top" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YgK-qZ-2fz">
-                                <rect key="frame" x="20" y="80" width="560" height="667"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YgK-qZ-2fz">
+                                <rect key="frame" x="20" y="80" width="560" height="291"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sight name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZt-dg-mik">
-                                        <rect key="frame" x="0.0" y="0.0" width="87" height="21"/>
+                                        <rect key="frame" x="237" y="0.0" width="87" height="21"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter sight name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-GP-r56">
-                                        <rect key="frame" x="0.0" y="33" width="550" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="30" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter sight name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9VK-GP-r56">
+                                        <rect key="frame" x="0.0" y="33" width="560" height="30"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JBH-Dz-PjG">
-                                        <rect key="frame" x="0.0" y="75" width="151" height="30"/>
-                                        <animations/>
-                                        <state key="normal" title="Set Default Label Text"/>
-                                        <connections>
-                                            <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="96A-ix-0q1"/>
-                                        </connections>
-                                    </button>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="160" placeholderIntrinsicHeight="160" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="GYd-Vn-ztK">
-                                        <rect key="frame" x="0.0" y="117" width="550" height="550"/>
+                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="160" placeholderIntrinsicHeight="160" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="GYd-Vn-ztK">
+                                        <rect key="frame" x="200" y="75" width="160" height="160"/>
                                         <animations/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -59,21 +51,18 @@
                                             <outletCollection property="gestureRecognizers" destination="26Z-3o-LQN" appends="YES" id="mRK-ff-BhE"/>
                                         </connections>
                                     </imageView>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="44" translatesAutoresizingMaskIntoConstraints="NO" id="31e-fb-tTn" customClass="RatingControl" customModule="SightsTracker" customModuleProvider="target">
+                                        <rect key="frame" x="160" y="247" width="240" height="44"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstItem="GYd-Vn-ztK" firstAttribute="centerX" secondItem="JBH-Dz-PjG" secondAttribute="centerX" id="3hB-6z-fLj"/>
                                     <constraint firstAttribute="trailing" secondItem="9VK-GP-r56" secondAttribute="trailing" id="C0M-tA-mIt"/>
-                                    <constraint firstAttribute="trailing" secondItem="GYd-Vn-ztK" secondAttribute="trailing" constant="10" id="K8B-sn-COd"/>
-                                    <constraint firstItem="GYd-Vn-ztK" firstAttribute="centerX" secondItem="9VK-GP-r56" secondAttribute="centerX" id="MVD-NJ-RsN"/>
                                     <constraint firstItem="9VK-GP-r56" firstAttribute="leading" secondItem="YgK-qZ-2fz" secondAttribute="leading" id="Pyb-fw-fDL"/>
-                                    <constraint firstItem="GYd-Vn-ztK" firstAttribute="leading" secondItem="YgK-qZ-2fz" secondAttribute="leading" constant="10" id="PzA-BJ-gQ7"/>
+                                    <constraint firstAttribute="width" constant="560" id="WSa-c4-pee"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3hB-6z-fLj"/>
-                                    </mask>
-                                </variation>
                             </stackView>
                         </subviews>
                         <animations/>
@@ -89,6 +78,7 @@
                     <connections>
                         <outlet property="nameTextField" destination="9VK-GP-r56" id="UDH-gz-jdE"/>
                         <outlet property="photoImageView" destination="GYd-Vn-ztK" id="WGr-HC-z9t"/>
+                        <outlet property="ratingControl" destination="31e-fb-tTn" id="9W6-bV-ugW"/>
                         <outlet property="sightNameLabel" destination="YZt-dg-mik" id="hgf-kr-CeX"/>
                     </connections>
                 </viewController>
