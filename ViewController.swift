@@ -16,11 +16,31 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var sightNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var sight: Sight?
+    
+    //MARK: Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if saveButton === sender{
+            let name = nameTextField.text ?? ""
+            let photo = photoImageView.image
+            let rating = ratingControl.rating
+            
+            sight = Sight(name: name, photo: photo, rating: rating)
+        }
+    }
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
+        
+        checkValidSightName()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,8 +54,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        saveButton.enabled = false
+    }
+    
+    func checkValidSightName(){
+        let text = nameTextField.text ?? ""
+        saveButton.enabled = !text.isEmpty
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
-        sightNameLabel.text = textField.text
+        checkValidSightName()
+        navigationItem.title = textField.text
     }
 
     // Mark: Actions

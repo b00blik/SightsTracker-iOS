@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="amO-li-fzk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Your Sights-->
+        <scene sceneID="ePt-OS-Qyf">
+            <objects>
+                <tableViewController id="kKC-CG-PT5" customClass="SightTableViewController" customModule="SightsTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="22" sectionFooterHeight="22" id="bPg-5Y-jUO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SightTableViewCell" rowHeight="90" id="zMY-14-yTj" customClass="SightTableViewCell" customModule="SightsTracker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86" width="600" height="90"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zMY-14-yTj" id="WGh-VJ-lga">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="Izg-Cd-kVp">
+                                            <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
+                                            <animations/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZs-Va-dAj">
+                                            <rect key="frame" x="97" y="8" width="495" height="21"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRu-3f-Mk2" customClass="RatingControl" customModule="SightsTracker">
+                                            <rect key="frame" x="97" y="37" width="240" height="44"/>
+                                            <animations/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="nameLabel" destination="mZs-Va-dAj" id="Io3-4X-YWM"/>
+                                    <outlet property="photoImageView" destination="Izg-Cd-kVp" id="vKG-Dc-tvh"/>
+                                    <outlet property="ratingControl" destination="JRu-3f-Mk2" id="fTv-AU-x2E"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kKC-CG-PT5" id="IDs-2V-Xbm"/>
+                            <outlet property="delegate" destination="kKC-CG-PT5" id="6eb-AJ-q3N"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Your Sights" id="UzN-oI-RHR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MAc-P4-KEI">
+                            <connections>
+                                <segue destination="kYg-j3-jvj" kind="presentation" identifier="AddItem" id="mky-0x-0Cr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61x-lZ-rWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="144"/>
+        </scene>
+        <!--New Sight-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SightsTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,28 +129,80 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="YgK-qZ-2fz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="aiD-yc-dPy"/>
+                            <constraint firstItem="YgK-qZ-2fz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="aiD-yc-dPy"/>
                             <constraint firstItem="YgK-qZ-2fz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="czL-NF-cwy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YgK-qZ-2fz" secondAttribute="trailing" id="uwU-he-DrB"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="New Sight" id="daG-oL-3pd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="mWM-BI-AGk">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="mAc-8x-JX2"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Pkt-jr-mZi">
+                            <connections>
+                                <segue destination="3ng-N6-xZp" kind="unwind" unwindAction="unwindToSightList:" id="3cK-1s-9q5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="nameTextField" destination="9VK-GP-r56" id="UDH-gz-jdE"/>
                         <outlet property="photoImageView" destination="GYd-Vn-ztK" id="WGr-HC-z9t"/>
                         <outlet property="ratingControl" destination="31e-fb-tTn" id="9W6-bV-ugW"/>
+                        <outlet property="saveButton" destination="Pkt-jr-mZi" id="6aA-P5-LyK"/>
                         <outlet property="sightNameLabel" destination="YZt-dg-mik" id="hgf-kr-CeX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="3ng-N6-xZp" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="26Z-3o-LQN">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="ABr-X1-dkT"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="305" y="418"/>
+            <point key="canvasLocation" x="2639" y="144"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="R1i-Jw-nNc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="amO-li-fzk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c9p-4f-UiA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kKC-CG-PT5" kind="relationship" relationship="rootViewController" id="3ND-e2-Y2M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DFk-qH-koT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="270" y="144"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9dH-jj-rSm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kYg-j3-jvj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vUI-rt-5nZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="40g-aF-Il2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QIi-l6-Avb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1827" y="144"/>
         </scene>
     </scenes>
     <resources>

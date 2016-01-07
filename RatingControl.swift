@@ -29,7 +29,7 @@ class RatingControl: UIView {
         let emptyStarImage = UIImage(named: "emptyStar")
         
         for (var i = 0; i<stars; i++){
-            let button = UIButton(frame: CGRect(x:0, y:0, width: 44, height: 44))
+            let button = UIButton()
             
             button.setImage(emptyStarImage, forState: .Normal)
             button.setImage(filledStarImage, forState: .Selected)
@@ -45,7 +45,10 @@ class RatingControl: UIView {
     }
     
     override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: 240, height: 44)
+        let buttonSize = Int(frame.size.height)
+        let width = (buttonSize + spacing) * stars
+        
+        return CGSize(width: width, height: buttonSize)
     }
     
     override func layoutSubviews() {
@@ -55,6 +58,7 @@ class RatingControl: UIView {
             buttonFrame.origin.x = CGFloat(index*(buttonSize + spacing))
             button.frame = buttonFrame
         }
+        updateButtonSelectionStates()
     }
     
     //MARK: Button Action
