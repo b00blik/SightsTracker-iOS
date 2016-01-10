@@ -18,16 +18,26 @@ class SightTableViewController: UITableViewController {
         
         if let sourceViewController = sender.sourceViewController as?
             ViewController, sight = sourceViewController.sight{
+                
+                if let selectedIndexPath = tableView.indexPathForSelectedRow{
+                    //Update existing sight
+                    sights[selectedIndexPath.row] = sight
+                    tableView.reloadRowsAtIndexPaths([selectedIndexPath], withRowAnimation: .Top) //.None
+                }else{
+                    let newIndexPath = NSIndexPath(forRow: sights.count, inSection: 0)
+                    sights.append(sight)
+                    tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+                }
         
-        let newIndexPath = NSIndexPath(forRow: sights.count, inSection: 0)
-        sights.append(sight)
-        tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
+        
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
         loadSimpleSights()
     }
     
@@ -36,10 +46,10 @@ class SightTableViewController: UITableViewController {
         let sight1 = Sight(name: "Moscow Kremlin", photo: photo1, rating: 3)!
         
         let photo2 = UIImage(named: "place2")!
-        let sight2 = Sight(name: "Trinity-Izmailovsky Cathedral", photo: photo2, rating: 5)!
+        let sight2 = Sight(name: "Kazan Cathedral", photo: photo2, rating: 5)!
         
         let photo3 = UIImage(named: "place3")!
-        let sight3 = Sight(name: "Kazan Cathedral", photo: photo3, rating: 4)!
+        let sight3 = Sight(name: "Trinity-Izmailovsky Cathedral", photo: photo3, rating: 4)!
         
         sights += [sight1, sight2, sight3];
     }
@@ -74,25 +84,25 @@ class SightTableViewController: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
+    
+    //Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
+
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
+            sights.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -109,14 +119,25 @@ class SightTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "ShowDetail"{
+            let sightDetailViewController = segue.destinationViewController as! ViewController
+            if let selectedSightCell = sender as? SightTableViewCell{
+                let indexPath = tableView.indexPathForCell(selectedSightCell)!
+                let selectedSight = sights[indexPath.row]
+                sightDetailViewController.sight = selectedSight
+            }
+        }
+        else if segue.identifier == "AddItem"{
+            print("Addint new sight!")
+        }
+        
     }
-    */
+
 
 }

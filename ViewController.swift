@@ -31,7 +31,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
     @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+        let isPresentingInAddingSightMode = presentingViewController is UINavigationController
+        
+        if isPresentingInAddingSightMode{
+            dismissViewControllerAnimated(true, completion: nil)
+            print("dismissViewControllerAnimated")
+        }else{
+            navigationController!.popViewControllerAnimated(true)
+            print("popViewControllerAnimated")
+        }
     }
     
     override func viewDidLoad() {
@@ -39,6 +47,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
+        
+        
+        //Set up views if editing the exisiting
+        if let sight = sight{
+            navigationItem.title = sight.name
+            nameTextField.text = sight.name
+            photoImageView.image = sight.photo
+            ratingControl.rating = sight.rating
+        }
         
         checkValidSightName()
     }
