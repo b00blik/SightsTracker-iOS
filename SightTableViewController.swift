@@ -13,6 +13,15 @@ class SightTableViewController: UITableViewController {
     //MARK: Properties
     var sights = [Sight]()
     
+    //MARK: NSCoding
+    
+    func saveSights(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(sights, toFile: Sight.ArchiveURL.path!)
+        if !isSuccessfulSave{
+            print("Failed to save sights!")
+        }
+    }
+    
     
     @IBAction func unwindToSightList(sender: UIStoryboardSegue){
         
@@ -28,7 +37,7 @@ class SightTableViewController: UITableViewController {
                     sights.append(sight)
                     tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Bottom)
                 }
-        
+                saveSights()
         
         }
     }
@@ -38,10 +47,14 @@ class SightTableViewController: UITableViewController {
 
         navigationItem.leftBarButtonItem = editButtonItem()
         
-        loadSimpleSights()
+        if let savedSights = loadSights(){
+            sights += savedSights
+        }else{
+            loadSampleSights()
+        }
     }
     
-    func loadSimpleSights(){
+    func loadSampleSights(){
         let photo1 = UIImage(named: "place1")!
         let sight1 = Sight(name: "Moscow Kremlin", photo: photo1, rating: 3)!
         
@@ -98,6 +111,7 @@ class SightTableViewController: UITableViewController {
         if editingStyle == .Delete {
             // Delete the row from the data source
             sights.removeAtIndex(indexPath.row)
+            saveSights()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -137,6 +151,12 @@ class SightTableViewController: UITableViewController {
             print("Addint new sight!")
         }
         
+    }
+    
+    func loadSights()->[Sight]?{
+        //return NSKeyedUnarchiver.unarchiveObjectWithFile(Sight.ArchiveURL.path!) as? [Sight]
+        return NSKeyedUnarchiver.unarchiveObjectWithFile(Sight.ArchiveURL.path!) as? [Sight]
+        //return nil
     }
 
 
