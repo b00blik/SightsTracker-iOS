@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var infoTextView: UITextView!
     
     var sight: Sight?
     
@@ -58,6 +59,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
         
         checkValidSightName()
+        loadSightInfo()
+    }
+    
+    func loadSightInfo(){
+        var dataString: String?
+        let url = NSURL(string: "https://yandex.ru")
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+            dataString = (NSString(data: data!, encoding: NSUTF8StringEncoding) as? String)
+            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            print("DATA STRING " + dataString!)
+            
+        }
+        task.resume()
     }
 
     override func didReceiveMemoryWarning() {
