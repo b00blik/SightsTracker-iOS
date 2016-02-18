@@ -63,15 +63,23 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     func loadSightInfo(){
-        var dataString: String?
-        let url = NSURL(string: "https://yandex.ru")
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-            dataString = (NSString(data: data!, encoding: NSUTF8StringEncoding) as? String)
-            //print(NSString(data: data!, encoding: NSUTF8StringEncoding))
-            print("DATA STRING " + dataString!)
-            
+        //TODO: Remove space in the end and spaces in center;
+        //TODO: Add parsing of dataString;
+        var dataString: String
+        let sightName = self.nameTextField.text! 
+        let myURLString = "https://en.wikipedia.org/w/api.php?action=query&titles=" + sightName + "&prop=revisions&rvprop=content&format=json"
+        print("myURLString " + myURLString)
+        if let myURL = NSURL(string: myURLString) {
+            do {
+                let dataString = try! NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding)
+                print(dataString)
+                infoTextView.text = dataString as String
+            } catch {
+                print("Error of resolve!")
+            }
+        } else {
+            print("Error of URL")
         }
-        task.resume()
     }
 
     override func didReceiveMemoryWarning() {
