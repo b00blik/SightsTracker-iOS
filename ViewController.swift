@@ -62,16 +62,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         loadSightInfo()
     }
     
+    // MARK: Taking and showing sight info
+    
     func loadSightInfo(){
         //TODO: Remove space in the end and spaces in center;
         //TODO: Add parsing of dataString;
         var dataString: String
-        let sightName = self.nameTextField.text! 
+        var sightName = self.nameTextField.text!
+        sightName = translateSightName(sightName)
         let myURLString = "https://en.wikipedia.org/w/api.php?action=query&titles=" + sightName + "&prop=revisions&rvprop=content&format=json"
         print("myURLString " + myURLString)
         if let myURL = NSURL(string: myURLString) {
             do {
-                let dataString = try! NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding)
+                var dataString = try! NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding) as String
+                print(dataString)
+                print("TRY TO TRANSLATE")
+                dataString = translateInfoString(dataString)
                 print(dataString)
                 infoTextView.text = dataString as String
             } catch {
@@ -80,6 +86,49 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         } else {
             print("Error of URL")
         }
+    }
+    
+    func translateSightName(sightName: String) -> String {
+        var retName: String
+        retName = sightName
+        var arrName = Array(retName.characters)
+        if (retName.characters.last == " "){
+            arrName.popLast()
+        }
+        retName = String(arrName)
+        retName = retName.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+            .stringByReplacingOccurrencesOfString("[", withString: "")
+            .stringByReplacingOccurrencesOfString("]", withString: "")
+            .stringByReplacingOccurrencesOfString("\"", withString: "")
+        return retName
+    }
+    
+    func translateInfoString(dataString: String) -> String{
+        var retString: String
+        var startPos: Range<String.Index>?
+        var endPos: Range<String.Index>?
+        
+        
+        startPos = dataString.rangeOfString("'''")
+        if startPos != nil {
+        retString = dataString.substringFromIndex(startPos!.startIndex)
+        endPos = retString.rangeOfString(".")
+        retString = retString.substringToIndex(endPos!.endIndex)
+        retString = retString.stringByReplacingOccurrencesOfString("'''", withString: "")
+            .stringByReplacingOccurrencesOfString("[", withString: "").stringByReplacingOccurrencesOfString("]", withString: "")
+        
+        startPos = retString.rangeOfString("({")
+        endPos = retString.rangeOfString("})")
+        
+            if startPos != nil && endPos != nil{
+                retString.removeRange(Range<String.Index>(start: startPos!.startIndex, end: endPos!.endIndex))
+            }
+            
+        } else {
+            retString = "Article is not found"
+        }
+        
+        return retString
     }
 
     override func didReceiveMemoryWarning() {
