@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     // MARK: Properties
 
+    @IBOutlet weak var fullStackView: UIStackView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var sightNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
@@ -20,6 +21,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var infoTextView: UITextView!
     
     var sight: Sight?
+    var scrollView: UIScrollView!
     
     //MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -45,7 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Handle the text field’s user input through delegate callbacks.
         nameTextField.delegate = self
         
@@ -58,8 +60,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             ratingControl.rating = sight.rating
         }
         
+        scrollView = UIScrollView()
+        //view.addSubview(scrollView)
+        //scrollView.addSubview(fullStackView)
+        
+        
         checkValidSightName()
         loadSightInfo()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //scrollView.contentSize = fullStackView.frame.size
+        //print("viewDidLayoutSubviews " + String(fullStackView.frame.size))
     }
     
     // MARK: Taking and showing sight info
@@ -67,7 +80,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func loadSightInfo(){
         //TODO: Remove space in the end and spaces in center;
         //TODO: Add parsing of dataString;
-        var dataString: String
         var sightName = self.nameTextField.text!
         sightName = translateSightName(sightName)
         let myURLString = "https://en.wikipedia.org/w/api.php?action=query&titles=" + sightName + "&prop=revisions&rvprop=content&format=json"
@@ -80,8 +92,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                 dataString = translateInfoString(dataString)
                 print(dataString)
                 infoTextView.text = dataString as String
-            } catch {
-                print("Error of resolve!")
             }
         } else {
             print("Error of URL")

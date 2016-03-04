@@ -104,7 +104,7 @@
                                             <outletCollection property="gestureRecognizers" destination="26Z-3o-LQN" appends="YES" id="mRK-ff-BhE"/>
                                         </connections>
                                     </imageView>
-                                    <textView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htz-tz-cPb">
+                                    <textView autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Htz-tz-cPb">
                                         <rect key="frame" x="160" y="247" width="240" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -152,6 +152,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="fullStackView" destination="YgK-qZ-2fz" id="axY-iZ-6FH"/>
                         <outlet property="infoTextView" destination="Htz-tz-cPb" id="pcY-OO-9PY"/>
                         <outlet property="nameTextField" destination="9VK-GP-r56" id="UDH-gz-jdE"/>
                         <outlet property="photoImageView" destination="GYd-Vn-ztK" id="WGr-HC-z9t"/>
